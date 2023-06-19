@@ -10,29 +10,37 @@
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  let rowSet = new Set()
-  let columnSet = new Set()
-
   for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
+    let row = new Set()
+    let col = new Set()
+    let box = new Set()
+    let [_row, _col, _box] = ['', '', '']
+
+    for (let j = 0; j < board.length; j++) {
       // Check by row
-      gridForRow = board[i][j]
-      if (gridForRow !== '.' && rowSet.has(gridForRow)) {
+      _row = board[i][j]
+      if (_row !== '.' && row.has(_row)) {
         return false
       } else {
-        rowSet.add(gridForRow)
+        row.add(_row)
       }
+
       // Check by column
-      gridForColumn = board[j][i]
-      if (gridForColumn !== '.' && columnSet.has(gridForColumn)) {
+      _col = board[j][i]
+      if (_col !== '.' && col.has(_col)) {
         return false
       } else {
-        columnSet.add(gridForColumn)
+        col.add(_col)
+      }
+
+      // Check by box
+      _box = board[Math.floor(i / 3) * 3 + Math.floor(j / 3)][(i % 3) * 3 + (j % 3)]
+      if (_box !== '.' && box.has(_box)) {
+        return false
+      } else {
+        box.add(_box)
       }
     }
-
-    rowSet = new Set() // Reset for each row
-    columnSet = new Set() // Reset for each column
   }
 
   return true
