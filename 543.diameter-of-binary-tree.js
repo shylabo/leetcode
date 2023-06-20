@@ -17,8 +17,24 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
-    
-};
-// @lc code=end
+var diameterOfBinaryTree = function (root) {
+  /**
+   * DFS
+   * Time Complexity: O(n)
+   * Space Complexity: O(n) *If the tree is balanced, it'd be O(logN)
+   */
+  let diameter = 0
+  dfs(root)
+  return diameter
 
+  function dfs(node) {
+    if (!node) return 0
+
+    const left = dfs(node.left)
+    const right = dfs(node.right)
+    diameter = Math.max(diameter, left + right)
+
+    return 1 + Math.max(left, right)
+  }
+}
+// @lc code=end
