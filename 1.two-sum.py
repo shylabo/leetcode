@@ -1,6 +1,5 @@
 #
 # @lc app=leetcode id=1 lang=python3
-#
 # [1] Two Sum
 #
 
